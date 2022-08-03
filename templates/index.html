@@ -38,9 +38,10 @@
         }
 
         .wrap {
-            max-width: 1200px;
+            max-width: 900px;
             width: 95%;
-            margin: 30px auto 0 auto;
+            margin: 30px auto 50px auto;
+
             }
 
 
@@ -66,14 +67,17 @@
 </div>
     <div class="wrap">
         <div id="card-box" class="row row-cols-1 row-cols-md-5 g-4">
+              {% for row in rows %}
             <div class="col">
+
                 <div class="card">
-                    {% for row in rows %}
-                            {% set book_image = row['coverLargeUrl'] %}
-                    <img src="{{book_image}}" class="card-img-top" alt="...">
-                  {% endfor %}
+
+
                 </div>
+
             </div>
+    </div>
+
     </div>
 </body>
 
