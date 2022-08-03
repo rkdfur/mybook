@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <title>리뷰 페이지</title>
+
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        #trip-box {
+            width: 95%;
+            max-width: 600px;
+            padding: 20px;
+            margin: 100px auto;
+
+        }
+
+        .posting-box {
+            width: 95%;
+            max-width: 600px;
+            margin: 10px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 3px 0px gray;
+
+        }
+
+        #dog-icon {
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        .review-box {
+            width: 95%;
+            max-width: 700px;
+            margin: 10px auto 0px auto;
+
+        }
+
+
+    </style>
+    <script>
+        $(document).ready(function () {
+
+        });
+
+        function review_posting(){
+            let star = $('#star').val()
+            let review = $('#review').val()
+            $.ajax({
+                type:'POST',
+                url: '/detail_save',
+                data : {star,review}
+
+            })
+
+        }
+    </script>
+</head>
+<body>
+<nav class="navbar fixed-top bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img
+                src="https://cdn-icons.flaticon.com/png/512/608/premium/608502.png?token=exp=1659354942~hmac=aa2ddd0e8991d95bc4e9e6358a215449"
+                id="dog-icon">도그트립</a>
+    </div>
+</nav>
+<div class="card mb-3" id="trip-box">
+    {% for row in rows %}
+    <img src="{{ row['coverLargeUrl'] }}" class="card-img-top" alt="...">
+    <div class="card-body">
+
+            <h5 class="card-title">책이름 : {{ row['title'] }}</h5>
+            <p class="card-text">위치 : {{ row['description'] }}</p>
+        {% endfor %}
+        <p class="card-text"><small class="text-muted">주의사항</small></p>
+
+    </div>
+</div>
+
+
+<div class="posting-box" id="post-box">
+    <div class="form-floating mb-3">
+        <input id="review" type="text" class="form-control" placeholder="name@example.com">
+    </div>
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">별점</label>
+        <select class="form-select" id="star">
+            <option selected>-- 선택하기 --</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+
+    </div>
+    <button type="button" class="btn btn-outline-success"id="review-posting" onclick="review_posting()">등록하기</button>
+</div>
+<div class="review-box" id="review-list">
+    <div class="border border-light p-2 mb-2 border-opacity-25">This is 25% opacity success border</div>
+</div>
+
+</div>
+</body>
+</html>
+
